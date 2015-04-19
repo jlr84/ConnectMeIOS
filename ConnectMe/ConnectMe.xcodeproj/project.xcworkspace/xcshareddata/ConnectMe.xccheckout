@@ -12,22 +12,34 @@
 	<dict>
 		<key>36DDC366F874F0193EAB99435556FA4C12CFCEE0</key>
 		<string>https://github.com/jlr84/ConnectMeIOS2.git</string>
+		<key>437260E4EBF4C6B50EF38A96AB8714B90986020D</key>
+		<string>https://github.com/jlr84/ConnectMeIOS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ConnectMe/ConnectMe.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>36DDC366F874F0193EAB99435556FA4C12CFCEE0</key>
+		<string>../../../../ConnectMeIOS2</string>
+		<key>437260E4EBF4C6B50EF38A96AB8714B90986020D</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/jlr84/ConnectMeIOS2.git</string>
+	<string>https://github.com/jlr84/ConnectMeIOS.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>36DDC366F874F0193EAB99435556FA4C12CFCEE0</string>
+	<string>437260E4EBF4C6B50EF38A96AB8714B90986020D</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>437260E4EBF4C6B50EF38A96AB8714B90986020D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ConnectMeIOS</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
