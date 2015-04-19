@@ -15,15 +15,10 @@ class ResumeViewController: UIViewController {
     
     @IBOutlet weak var resumeWebView: UIWebView!
     
-  //  var pdfLoc = NSURL(fileURLWithPath:NSBundle.mainBundle().pathForResource("resumeSamplePDF.pdf", ofType:"pdf")!)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Load Sample PDF
-       // var request = NSURLRequest(URL: pdfLoc!);
-       // self.resumeWebView.loadRequest(request);
-        
         var url = NSURL(string: "http://www.prism.gatech.edu/~jroberts302/ConnectMe/docs/functionalSampleResume.pdf")
         var request = NSURLRequest(URL: url!)
         resumeWebView.loadRequest(request)

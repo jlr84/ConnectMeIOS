@@ -11,6 +11,16 @@ import UIKit
 class LoginScreenViewController: UIViewController {
 
     private var CurrentUserName = "DEMO.USER@gmail.com"
+    private let API_KEY : String = "777ylayrxi4pb3"
+    private let SECRET_KEY : String = "ScJFq56I7oAN9JO5"
+    
+    //Sample LinkedIn Request: 
+    //https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=123456789&redirect_uri=https%3A%2F%2Fwww.example.com%2Fauth%2Flinkedin&state=987654321&scope=r_basicprofile
+    // response_type  always "code" - mandatory
+    // client_id   API KEY  - mandatory
+    // redirect_uri  must match one of our redirect URL in the Linked in app configuration - mandatory
+    // state  a unique string that is hard to guess - mandatory
+    // scope  specific permissions requested, defaults to app default - optional
     
     override func viewDidLoad() {
         super.viewDidLoad()
