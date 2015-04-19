@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="14C1514" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Profile" representedClassName="ConnectMe.Profile">
+        <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="middleInitial" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <userInfo/>
+    </entity>
+    <entity name="ReceivedItems" representedClassName="ConnectMe.ReceivedItems" syncable="YES">
+        <attribute name="dateReceived" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="itemName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="senderName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Resume" representedClassName="ConnectMe.Resume" syncable="YES">
+        <attribute name="resumeDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="resumePath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="resumeTitle" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="SentItems" representedClassName="ConnectMe.SentItems" syncable="YES">
+        <attribute name="dateSent" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="recipientName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Tags" representedClassName="ConnectMe.Tags" syncable="YES">
+        <attribute name="active" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="dateEnd" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateStart" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="tagCompany" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tagDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tagName" attributeType="String" syncable="YES"/>
+        <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Profile" positionX="-63" positionY="-18" width="128" height="163"/>
+        <element name="SentItems" positionX="-54" positionY="-9" width="128" height="73"/>
+        <element name="ReceivedItems" positionX="-36" positionY="9" width="128" height="88"/>
+        <element name="Resume" positionX="-18" positionY="27" width="128" height="88"/>
+        <element name="Tags" positionX="0" positionY="45" width="128" height="148"/>
+    </elements>
+</model>

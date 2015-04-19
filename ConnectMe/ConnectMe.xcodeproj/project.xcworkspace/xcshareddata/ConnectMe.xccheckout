@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C53ED8B7-7385-4E8A-8944-056E07E6103D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ConnectMe</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>36DDC366F874F0193EAB99435556FA4C12CFCEE0</key>
+		<string>https://github.com/jlr84/ConnectMeIOS2.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ConnectMe/ConnectMe.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>36DDC366F874F0193EAB99435556FA4C12CFCEE0</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/jlr84/ConnectMeIOS2.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>36DDC366F874F0193EAB99435556FA4C12CFCEE0</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>36DDC366F874F0193EAB99435556FA4C12CFCEE0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ConnectMeIOS2</string>
+		</dict>
+	</array>
+</dict>
+</plist>
