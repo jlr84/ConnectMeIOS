@@ -29,6 +29,9 @@
 		1ADDFB4B1AC39D1200DAD2CC /* SignedInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADDFB4A1AC39D1200DAD2CC /* SignedInViewController.swift */; };
 		1ADDFB4D1AC3BC2300DAD2CC /* InitialChoiceNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADDFB4C1AC3BC2300DAD2CC /* InitialChoiceNavViewController.swift */; };
 		1ADDFB4F1AC3BE4600DAD2CC /* SendResumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADDFB4E1AC3BE4600DAD2CC /* SendResumeViewController.swift */; };
+		1AEEEDE21AE8D83C007F127D /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEEEDE11AE8D83C007F127D /* SwiftyJSON.swift */; };
+		1AEEEDE61AE8D900007F127D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEEEDE51AE8D900007F127D /* DataManager.swift */; };
+		1AEEEDE81AE9890D007F127D /* Roberts_Resume_Sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1AEEEDE71AE9890D007F127D /* Roberts_Resume_Sample.pdf */; };
 		1AF273311AE02681006DADB2 /* functionalSampleResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1AF273301AE02681006DADB2 /* functionalSampleResume.pdf */; };
 		1AF273331AE02694006DADB2 /* resumeSamplePDF.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1AF273321AE02694006DADB2 /* resumeSamplePDF.pdf */; };
 /* End PBXBuildFile section */
@@ -70,6 +73,9 @@
 		1ADDFB4A1AC39D1200DAD2CC /* SignedInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignedInViewController.swift; sourceTree = "<group>"; };
 		1ADDFB4C1AC3BC2300DAD2CC /* InitialChoiceNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialChoiceNavViewController.swift; sourceTree = "<group>"; };
 		1ADDFB4E1AC3BE4600DAD2CC /* SendResumeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendResumeViewController.swift; sourceTree = "<group>"; };
+		1AEEEDE11AE8D83C007F127D /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		1AEEEDE51AE8D900007F127D /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		1AEEEDE71AE9890D007F127D /* Roberts_Resume_Sample.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Roberts_Resume_Sample.pdf; sourceTree = "<group>"; };
 		1AF273301AE02681006DADB2 /* functionalSampleResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = functionalSampleResume.pdf; sourceTree = "<group>"; };
 		1AF273321AE02694006DADB2 /* resumeSamplePDF.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = resumeSamplePDF.pdf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,16 +120,12 @@
 			isa = PBXGroup;
 			children = (
 				1ADDFB251AC394D400DAD2CC /* AppDelegate.swift */,
-				1ADDFB2A1AC394D400DAD2CC /* ViewController.swift */,
 				1ADDFB2C1AC394D400DAD2CC /* Main.storyboard */,
+				1AEEEDE41AE8D86C007F127D /* Local-Data */,
+				1AEEEDE31AE8D847007F127D /* JSON-Support */,
+				1ADDFB2A1AC394D400DAD2CC /* ViewController.swift */,
 				1A74E2701AC4A85E0018A853 /* DocsListTableViewController.swift */,
 				1A74E26C1AC425EF0018A853 /* ReceiveBaseViewController.swift */,
-				1A44CB571AE446D700B55E1D /* ConnectMe.xcdatamodeld */,
-				1A74E22E1AC40D6F0018A853 /* Profile.swift */,
-				1A74E22F1AC40D6F0018A853 /* ReceivedItems.swift */,
-				1A74E2301AC40D6F0018A853 /* Resume.swift */,
-				1A74E2311AC40D6F0018A853 /* SentItems.swift */,
-				1A74E2321AC40D6F0018A853 /* Tags.swift */,
 				1A74E2281AC407260018A853 /* ResumeViewController.swift */,
 				1A74E2201AC3E5830018A853 /* ManageProfileViewController.swift */,
 				1A74E21E1AC3D2600018A853 /* CompanyDetailViewController.swift */,
@@ -142,6 +144,7 @@
 		1ADDFB231AC394D400DAD2CC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1AEEEDE71AE9890D007F127D /* Roberts_Resume_Sample.pdf */,
 				1AF273321AE02694006DADB2 /* resumeSamplePDF.pdf */,
 				1AF273301AE02681006DADB2 /* functionalSampleResume.pdf */,
 				1ADDFB241AC394D400DAD2CC /* Info.plist */,
@@ -164,6 +167,28 @@
 				1ADDFB3D1AC394D500DAD2CC /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1AEEEDE31AE8D847007F127D /* JSON-Support */ = {
+			isa = PBXGroup;
+			children = (
+				1AEEEDE51AE8D900007F127D /* DataManager.swift */,
+				1AEEEDE11AE8D83C007F127D /* SwiftyJSON.swift */,
+			);
+			name = "JSON-Support";
+			sourceTree = "<group>";
+		};
+		1AEEEDE41AE8D86C007F127D /* Local-Data */ = {
+			isa = PBXGroup;
+			children = (
+				1A74E2311AC40D6F0018A853 /* SentItems.swift */,
+				1A74E2321AC40D6F0018A853 /* Tags.swift */,
+				1A74E2301AC40D6F0018A853 /* Resume.swift */,
+				1A74E22F1AC40D6F0018A853 /* ReceivedItems.swift */,
+				1A74E22E1AC40D6F0018A853 /* Profile.swift */,
+				1A44CB571AE446D700B55E1D /* ConnectMe.xcdatamodeld */,
+			);
+			name = "Local-Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +271,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AEEEDE81AE9890D007F127D /* Roberts_Resume_Sample.pdf in Resources */,
 				1ADDFB2E1AC394D400DAD2CC /* Main.storyboard in Resources */,
 				1A74E2731AC4AF830018A853 /* images.jpeg in Resources */,
 				1AF273331AE02694006DADB2 /* resumeSamplePDF.pdf in Resources */,
@@ -283,7 +309,9 @@
 				1A44CB591AE446D700B55E1D /* ConnectMe.xcdatamodeld in Sources */,
 				1A74E2291AC407260018A853 /* ResumeViewController.swift in Sources */,
 				1A74E2351AC40D6F0018A853 /* ReceivedItems.swift in Sources */,
+				1AEEEDE61AE8D900007F127D /* DataManager.swift in Sources */,
 				1ADDFB261AC394D400DAD2CC /* AppDelegate.swift in Sources */,
+				1AEEEDE21AE8D83C007F127D /* SwiftyJSON.swift in Sources */,
 				1A74E21F1AC3D2600018A853 /* CompanyDetailViewController.swift in Sources */,
 				1A74E26D1AC425EF0018A853 /* ReceiveBaseViewController.swift in Sources */,
 			);

@@ -33,10 +33,10 @@ class SendResumeViewController: UIViewController {
     
     func initialSetup() {
         getTagList()
-        if ( tagList.count >= 1 ) {
-            println("No need to load data")
-        } else {
-            println("need to load data")
+        //if ( tagList.count >= 1 ) {
+         //   println("No need to load data")
+       // } else {
+        //    println("need to load data")
             
             if let moc = self.managedObjectContext {
                 //Create Dummy data
@@ -57,7 +57,7 @@ class SendResumeViewController: UIViewController {
             }
             
         }
-    }
+    // }
  
     func getTagList() {
         let fetchRequest = NSFetchRequest(entityName: "Tags")

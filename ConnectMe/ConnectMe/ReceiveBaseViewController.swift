@@ -19,16 +19,56 @@ class ReceiveBaseViewController: UIViewController, UITableViewDataSource, UITabl
     //empty array of tags
     var tagList = [Tags]()
     //var docList = [ReceivedItems]()
+    let getdatatype = "Companies"
+    var myTagArray = [String]()
+    let textCellIdentifier = "tagCell"
+    var profileList = [Profile]()
+    var TagOwner = "Apple"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initialSetup()
+        println("Verifying User...")
+        verifyUser()
+        println("clearing tag list...")
+        clearTagList()
         
+        // getTagList()
+        
+        // initialSetup()
+        
+        downloadConnectMeData()
+        println("ConnectMeData Downloaded")
+        for item in self.myTagArray {
+            println("Downloaded tags... \(item)")
+        }
+        
+        //getTagList()
+        
+        //tagTableView2.dataSource = self.myTagArray
         tagTableView2.dataSource = self
         
-        getTagList()
+        //getTagList()
         
+        // FOR NEW TABLE VIEW DATA SOURCE
+       // tableView.delegate = self
+       // tableView.dataSource = self
+        
+    }
+    
+    func verifyUser() {
+        let fetchRequest = NSFetchRequest(entityName: "Profile")
+        
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Profile] {
+            profileList = fetchResults
+        }
+        
+        let CurrentUser = profileList[0].userName
+        println("Current User is... \(CurrentUser)")
+        
+        TagOwner = profileList[0].title!
+        println("Current Tag Owner is ... \(CurrentUser)")
+
     }
     
     func initialSetup() {
@@ -60,7 +100,21 @@ class ReceiveBaseViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
-    func getTagList() {
+    func clearTagList() {
+        var tempTagList = [Tags]()
+        
+        let fetchRequest = NSFetchRequest(entityName: "Tags")
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Tags] {
+            tempTagList = fetchResults
+        }
+
+        for thisTag in tempTagList {
+            managedObjectContext?.deleteObject(thisTag)
+        }
+    }
+    
+    
+    func deleteAppleTags() {
         let fetchRequest = NSFetchRequest(entityName: "Tags")
         
         // Sort by title
@@ -74,8 +128,74 @@ class ReceiveBaseViewController: UIViewController, UITableViewDataSource, UITabl
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Tags] {
             tagList = fetchResults
         }
+        
+        // Delete previous Apple tags
+        for Tags in tagList {
+            // Delete it from the managedObjectContext
+            managedObjectContext?.deleteObject(Tags)
+        }
     }
     
+    func getTagList() {
+        let fetchRequest = NSFetchRequest(entityName: "Tags")
+        
+        // Sort by title
+        let sortDescriptor = NSSortDescriptor(key: "tagName", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        // Predicate for filtering
+        let predicate = NSPredicate(format: "tagCompany == %@", TagOwner)
+        fetchRequest.predicate = predicate
+        
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Tags] {
+            tagList = fetchResults
+        }
+        
+    }
+    
+    func downloadConnectMeData() {
+        
+        DataManager.getDataWithSuccess( getdatatype ) { (data) -> Void in
+            
+            // Insert comment here
+            let json = JSON(data: data)
+            //if let companyName = json[0]["name"].string {
+            //    println("SwiftyJSON: \(companyName)")
+            //    println("Company Count: \(json.count)")
+                
+                for num in 0 ... json.count{
+                    if let sname = json[num]["name"].string {
+                        println(sname)
+                        
+                        if sname == self.TagOwner {
+                            for num2 in 0 ... json[num]["tags"].count {
+                                if let tag = json[num]["tags"][num2].string {
+                                    let tagnumber = num2 + 1
+                                    println("Tag #\(tagnumber) for \(sname) is \(tag)")
+                                    self.myTagArray.append(tag)
+                                    println("Total Tag Count is... \(self.myTagArray.count)")
+                                }
+                            }
+                        }
+                        
+                    }
+                
+            }
+            
+            println("Done Parsing...Tag List is: ")
+            //self.deleteAppleTags()
+            if self.myTagArray.count > 0 {
+            for num3 in 0 ... self.myTagArray.count - 1 {
+                println(self.myTagArray[num3])
+                self.saveNewTag(self.myTagArray[num3])
+                self.tagTableView2.delegate = self
+                self.tagTableView2.dataSource = self
+                }
+            }
+        }
+        
+    }
+
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -91,6 +211,7 @@ class ReceiveBaseViewController: UIViewController, UITableViewDataSource, UITabl
     let addTagTextAlertViewTag = 1
     var newTagDescriptionTextField: UITextField?
     var newTagTextField: UITextField?
+    
     func addNewTag() {
         
         var titlePrompt = UIAlertController(title: "Enter New Name", message: "", preferredStyle: .Alert)
@@ -125,7 +246,7 @@ class ReceiveBaseViewController: UIViewController, UITableViewDataSource, UITabl
     func saveNewTag(title : String) {
         
         // Create the new Tag
-        var newTagItem = Tags.createInManagedObjectContext(self.managedObjectContext!, name: title, description: "", website: "", company: "Apple")
+        var newTagItem = Tags.createInManagedObjectContext(self.managedObjectContext!, name: title, description: "", website: "https://www.apple.com/jobs/us/students.html", company: TagOwner)
         
         // Update the array containing the table view row data
         self.getTagList()
@@ -154,8 +275,38 @@ class ReceiveBaseViewController: UIViewController, UITableViewDataSource, UITabl
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Table view data source
+    // MARK: NEW TABLE DATA SOURCE
+    // Note, data is in myTagArray
+    // Note, text cell identifier is "tagCell"
+    // first, set in viewDidLoad...
+  /*  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int ) -> Int {
+        return myTagArray.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath ) as UITableViewCell
+        
+        let row = indexPath.row
+        cell.textLabel?.text = myTagArray[row]
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let row = indexPath.row
+        println(myTagArray[row])
+        
+    }
+  */
+    
+    // MARK: - Table view data source
+
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
@@ -180,7 +331,7 @@ class ReceiveBaseViewController: UIViewController, UITableViewDataSource, UITabl
         
     return cell
     }
-    
+ 
 
     // Override to support conditional editing of the table view.
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -197,11 +348,11 @@ class ReceiveBaseViewController: UIViewController, UITableViewDataSource, UITabl
         // Delete it from the managedObjectContext
         managedObjectContext?.deleteObject(tagToDelete)
         
-        // Refresh teh table view
+        // Refresh the table view
         self.getTagList()
         
         // tell the table view to animate out that row
-        tagTableView2.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         save()
         
     }/* else if editingStyle == .Insert {
@@ -211,15 +362,6 @@ class ReceiveBaseViewController: UIViewController, UITableViewDataSource, UITabl
     @IBAction func ViewResumeSelected (sender:AnyObject) {
         //if ( searchTagList.count >= 1 ) {
             println("Viewing Resume...")
-          //  submitted = false
-            //var alertView = UIAlertView()
-            //alertView.title = "RESUME SUBMITTED"
-            //var alertMessage = "Your default resume was successfully submitted to "
-            //alertMessage += searchTagList[0].tagName
-            //alertMessage += "!!"
-            //alertView.message = alertMessage
-            //alertView.addButtonWithTitle("Close")
-            //alertView.show()
         self.performSegueWithIdentifier("ShowResumeSegue", sender: ReceiveBaseViewController.self)
     }
     /*

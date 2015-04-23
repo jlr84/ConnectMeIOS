@@ -23,8 +23,38 @@ class ManageProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Create new fetch request
+        let fetchRequest = NSFetchRequest(entityName: "Profile")
         
-        let newProfile = NSEntityDescription.insertNewObjectForEntityForName("Profile", inManagedObjectContext: self.managedObjectContext!) as Profile
+        // Execute fetch request
+        if let fetchResults  = managedObjectContext?.executeFetchRequest(fetchRequest, error: nil) as? [Profile] {
+            
+            // Create an Alert and set it's message to whatever userName is
+            var alertView = UIAlertView()
+            var alertMessage = ""
+            alertMessage += fetchResults[0].firstName!
+            alertMessage += ", Click to Edit your profile."
+            alertView.message = alertMessage
+            alertView.addButtonWithTitle("Continue")
+            //Display the alert
+            
+            alertView.show()
+            //self.presentViewController(alert, animated: true, completion: nil)
+            
+            firstname.text! = fetchResults[0].firstName!
+            lastname.text! = fetchResults[0].lastName!
+            middlename.text! = fetchResults[0].middleInitial!
+            phone.text! = fetchResults[0].phone!
+            email.text! = fetchResults[0].email!
+            profiletitle.text! = fetchResults[0].title!
+        }
+        
+        
+        
+        
+        
+        
+       /* let newProfile = NSEntityDescription.insertNewObjectForEntityForName("Profile", inManagedObjectContext: self.managedObjectContext!) as Profile
         
         newProfile.company = "No Company"
         newProfile.email = "abdul.latheef@gatech.edu"
@@ -34,39 +64,15 @@ class ManageProfileViewController: UIViewController {
         newProfile.phone = "360-555-1234"
         newProfile.title = "Student"
         newProfile.userName = "abdul.latheef@gatech.edu"
-
+*/
         // Do any additional setup after loading the view.
+        
+        
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        //Create new fetch request
-        let fetchRequest = NSFetchRequest(entityName: "Profile")
-        
-        // Execute fetch request
-        if let fetchResults  = managedObjectContext?.executeFetchRequest(fetchRequest, error: nil) as? [Profile] {
-            // Create an Alert and set it's message to whatever userName is
-            var alertView = UIAlertView()
-            var alertMessage = ""
-            alertMessage += "Click to Edit your profile"
-            alertView.title = fetchResults[0].firstName!
-            alertMessage += fetchResults[0].firstName!
-            alertMessage += ", Click to Edit your profile."
-            alertView.message = alertMessage
-            alertView.addButtonWithTitle("Continue")
-            //Display the alert
-            
-            alertView.show()
-            //self.presentViewController(alert, animated: true, completion: nil)
-       /*
-            firstname.text! = fetchResults[0].firstName!
-            lastname.text! = fetchResults[0].lastName!
-            middlename.text! = fetchResults[0].middleInitial!
-            phone.text! = fetchResults[0].phone!
-            email.text! = fetchResults[0].email!
-            profiletitle.text! = fetchResults[0].title!
-     */   }
     }
     
     

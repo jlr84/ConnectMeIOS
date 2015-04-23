@@ -19,10 +19,11 @@ class ResumeViewController: UIViewController {
         super.viewDidLoad()
 
         // Load Sample PDF
-        var url = NSURL(string: "http://www.prism.gatech.edu/~jroberts302/ConnectMe/docs/functionalSampleResume.pdf")
+        //var url = NSURL(string: "http://www.prism.gatech.edu/~jroberts302/ConnectMe/docs/functionalSampleResume.pdf")
+        var url = NSURL(string: "https://www.dropbox.com/s/kg0yu2p5m15xtb3/Roberts_Resume_Sample.pdf?dl=0")
         var request = NSURLRequest(URL: url!)
         resumeWebView.loadRequest(request)
-        println("Fake Resume Loaded")
+        println("Resume Loaded")
 
         
     }

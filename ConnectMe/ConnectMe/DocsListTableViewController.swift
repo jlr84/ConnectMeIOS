@@ -17,9 +17,14 @@ class DocsListTableViewController: UITableViewController, UITableViewDataSource 
     let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
     
     var docList = [ReceivedItems]()
+    var profileList = [Profile]()
+    var TagOwner = "Apple"
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        verifyUser()
 
         initialSetup()
          
@@ -28,34 +33,69 @@ class DocsListTableViewController: UITableViewController, UITableViewDataSource 
         getDocList()
     }
     
+    func verifyUser() {
+        let fetchRequest = NSFetchRequest(entityName: "Profile")
+        
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Profile] {
+            profileList = fetchResults
+        }
+        
+        let CurrentUser = profileList[0].userName
+        println("Current Received Docs User is... \(CurrentUser)")
+        
+        TagOwner = profileList[0].title!
+        println("Current Received Docs Tag Owner is ... \(CurrentUser)")
+        
+    }
+    
+    
     func initialSetup() {
         getDocList()
-        if ( docList.count >= 1 ) {
-            println("No need to load document data")
-        } else {
-            println("need to load document data")
+        //if ( docList.count >= 1 ) {
+      //      println("No need to load document data")
+      //  } else {
+     //       println("need to load document data")
             
             if let moc = self.managedObjectContext {
+                
+                // Delete Current Data
+                if docList.count > 0 {
+                    for row in 0 ... docList.count - 1 {
+                        let docItemToDelete = docList[row]
+                        managedObjectContext?.deleteObject(docItemToDelete)
+                    }
+                self.getDocList()
+                }
+                
                 //Create Dummy data
-                var docs = [
-                    ("Doe, John", "2015-03-24 13:23"),
+                var docs1 = [
+                    ("Roberts, James", "2015-03-24 13:23"),
                     ("Latheef, Abdul", "2015-03-23 17:45"),
                     ("Donald, Kimberly", "2015-03-23 16:33"),
                     ("Stevens, Vaibav", "2015-03-22 15:37)"),
                     ("Conroy, Pat", "2015-03-22 14:05"),
                     ("Graedon, Kat", "2015-03-22 09:34")
                 ]
+                var docs2 = [
+                    ("NO RECEIVED DOCUMENTS FOUND", "2015-04-23 1830")
+                ]
                
                 // Loop through, creating items
-                for (person, date) in docs {
-                    ReceivedItems.createInManagedObjectContext(moc, senderName: person, itemName: date)
+                
+                if TagOwner == "Apple" {
+                    for (person, date) in docs1 {
+                        ReceivedItems.createInManagedObjectContext(moc, senderName: person, itemName: date)
+                    } } else {
+                        for (person, date) in docs2 {
+                            ReceivedItems.createInManagedObjectContext(moc, senderName: person, itemName: date)
+                    }
                 }
                 
                 documentTableView.dataSource = self
             }
             
         }
-    }
+   // }
     
     
     func getDocList() {
@@ -68,6 +108,7 @@ class DocsListTableViewController: UITableViewController, UITableViewDataSource 
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [ReceivedItems] {
             docList = fetchResults
         }
+        
     }
     
     func save() {

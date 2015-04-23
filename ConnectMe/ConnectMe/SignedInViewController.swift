@@ -10,10 +10,60 @@ import UIKit
 
 class SignedInViewController: UIViewController {
 
+    var myTagArray = [String]()
+    var currentusername : String?
+    let getdatatype = "Companies"
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Dispaly current user
+        if currentusername == nil {
+            println("Data transfer FAILED")
+            println(currentusername)
+        } else {
+        println("Current Username is \(currentusername)")
+        }
+        
+        // Download ConnectMe Data
+        downloadConnectMeData()
+        
+    }
+    
+    func downloadConnectMeData() {
+        
+        DataManager.getDataWithSuccess( getdatatype ) { (data) -> Void in
+            
+            // Insert comment here
+            let json = JSON(data: data)
+            if let companyName = json[0]["name"].string {
+                println("SwiftyJSON: \(companyName)")
+                println("Company Count: \(json.count)")
+                
+                for num in 0 ... json.count{
+                    if let sname = json[num]["name"].string {
+                        println(sname)
+                        
+                        for num2 in 0 ... json[num]["tags"].count {
+                            if let tag = json[num]["tags"][num2].string {
+                                let tagnumber = num2 + 1
+                                println("Tag #\(tagnumber) for \(sname) is \(tag)")
+                                self.myTagArray.append(tag)
+                                println("Total Tag Count is... \(self.myTagArray.count)")
+                            }
+                        }
+                        
+                    }
+                }
+            }
+            
+            println("Done Parsing...Tag List is: ")
+            for num3 in 0 ... self.myTagArray.count - 1 {
+                println(self.myTagArray[num3])
+            }
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
